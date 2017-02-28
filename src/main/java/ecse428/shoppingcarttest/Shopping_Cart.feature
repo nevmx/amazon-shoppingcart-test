@@ -39,7 +39,7 @@ Feature: Placing items in the shopping cart
                 | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 1               | 1            | 2             |
                 | Starbucks Coffee House Blend, Ground, 12 oz                  | 1               | 1            | 2             |
                 | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 5               | 2            | 7             |
-                | Starbucks Coffee House Blend, Ground, 12 oz                  | 7               | 3            | 10            |
+                | Starbucks Coffee House Blend, Ground, 12 oz                  | 7               | 2            | 9             |
 
     Scenario Outline: Add an Out-Of-Stock item to the Shopping Cart
 

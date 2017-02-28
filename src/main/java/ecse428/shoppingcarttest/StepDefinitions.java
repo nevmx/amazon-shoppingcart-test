@@ -50,6 +50,21 @@ public class StepDefinitions {
 		}
 	}
 	
+	@Given("I have (.*) of (.*) in my shopping cart")
+	public void I_have_of_in_my_shopping_cart(String initialQuantity, String itemName) throws InterruptedException {
+		// First, clean the shopping cart
+		I_have_an_empty_shopping_cart();
+		
+		// Add an item
+		I_am_adding_item(itemName);
+		
+		// Add a specific quantity of the item
+		I_am_adding_quantity(initialQuantity);
+		
+		// Add it to the cart
+		I_click("\"Add to Cart\"");
+	}
+	
 	@Given("I am adding item (.*)")
 	public void I_am_adding_item(final String itemName) throws InterruptedException {
 		// The following code avoids the StaleElementReferenceException
