@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -73,7 +74,11 @@ public class StepDefinitions {
 	
 	@Given("I am adding quantity (.*)")
 	public void I_am_adding_quantity(String itemQuantity) {
-		System.out.println("Set quantity " + itemQuantity);
+		// Find the quantity dropdown
+		Select quantityDropdown = new Select(fluentWait(By.id("quantity")));
+		
+		// Select the right quantity
+		quantityDropdown.selectByValue(itemQuantity);
 	}
 	
 	@Given("The item has status (.*)")
@@ -101,13 +106,13 @@ public class StepDefinitions {
 	
 	@After
 	public void tearDown() {
-		wd.close();
+		wd.quit();
 	}
 	
 	private WebElement fluentWait(final By locator) {
 	    Wait<WebDriver> wait = new FluentWait<WebDriver>(wd)
 	            .withTimeout(30, TimeUnit.SECONDS)
-	            .pollingEvery(5, TimeUnit.SECONDS)
+	            .pollingEvery(2, TimeUnit.SECONDS)
 	            .ignoring(NoSuchElementException.class);
 
 	    WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
