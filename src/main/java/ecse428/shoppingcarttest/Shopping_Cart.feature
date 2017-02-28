@@ -11,7 +11,7 @@ Feature: Placing items in the shopping cart
 
         Given I have an empty shopping cart
         And I am adding item <itemName>
-        And I am adding a quantity <itemQuantity>
+        And I am adding quantity <itemQuantity>
         And The item has status "In-Stock"
         When I click "Add to Cart"
         Then I have <finalQuantity> of <itemName> in my cart
@@ -31,7 +31,7 @@ Feature: Placing items in the shopping cart
 
             Given I have <initialQuantity> of <itemName> in my shopping cart
             And I am adding item <itemName>
-            And I am adding a quantity <itemQuantity>
+            And I am adding quantity <itemQuantity>
             And The item has status "In-Stock"
             When I click "Add to Cart"
             Then I have <finalQuantity> of <itemName> in my cart
@@ -51,7 +51,7 @@ Feature: Placing items in the shopping cart
 
             Given I have an empty shopping cart
             And I am adding item <itemName>
-            And I am adding a quantity <itemQuantity>
+            And I am adding quantity <itemQuantity>
             And The item has status "Out-Of-Stock"
             When I click "Add to Cart"
             Then I don't have item <itemName> in my shopping cart
