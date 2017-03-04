@@ -16,11 +16,11 @@ Feature: Placing items in the shopping cart
         Then I have <finalQuantity> of <itemName> in my cart
 
         Examples:
-            | itemName                                                     | itemQuantity | finalQuantity |
-            | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 1            | 1             |
-            | Starbucks Coffee House Blend, Ground, 12 oz                  | 1            | 1             |
-            | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 5            | 5             |
-            | Starbucks Coffee House Blend, Ground, 12 oz                  | 5            | 5             |
+            | itemName                                             | itemQuantity | finalQuantity |
+            | Kicking Horse Coffee, Whole Bean, Grizzly Claw, 1 lb | 1            | 1             |
+            | Starbucks Coffee House Blend, Ground, 12 oz          | 1            | 1             |
+            | Kicking Horse Coffee, Whole Bean, Grizzly Claw, 1 lb | 5            | 5             |
+            | Starbucks Coffee House Blend, Ground, 12 oz          | 5            | 5             |
 
     Scenario Outline: Add an In-Stock item to a non-empty Shopping Cart
 
@@ -35,11 +35,11 @@ Feature: Placing items in the shopping cart
             Then I have <finalQuantity> of <itemName> in my cart
 
             Examples:
-                | itemName                                                     | initialQuantity | itemQuantity | finalQuantity |
-                | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 1               | 1            | 2             |
-                | Starbucks Coffee House Blend, Ground, 12 oz                  | 1               | 1            | 2             |
-                | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 5               | 2            | 7             |
-                | Starbucks Coffee House Blend, Ground, 12 oz                  | 7               | 2            | 9             |
+                | itemName                                             | initialQuantity | itemQuantity | finalQuantity |
+                | Kicking Horse Coffee, Whole Bean, Grizzly Claw, 1 lb | 1               | 1            | 2             |
+                | Starbucks Coffee House Blend, Ground, 12 oz          | 1               | 1            | 2             |
+                | Kicking Horse Coffee, Whole Bean, Grizzly Claw, 1 lb | 5               | 2            | 7             |
+                | Starbucks Coffee House Blend, Ground, 12 oz          | 7               | 2            | 9             |
 
     Scenario Outline: Add an Out-Of-Stock item to the Shopping Cart
 
@@ -49,14 +49,11 @@ Feature: Placing items in the shopping cart
 
             Given I have an empty shopping cart
             And I am adding item <itemName>
-            And I am adding quantity <itemQuantity>
             And The item has status "Out-Of-Stock"
-            When I click "Add to Cart"
-            Then I don't have item <itemName> in my shopping cart
+            When I click "Add to Wishlist"
+            Then I have nothing in my shopping cart
 
             Examples:
                 | itemName                                                     | itemQuantity |
-                | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 1            |
-                | Starbucks Coffee House Blend, Ground, 12 oz                  | 1            |
-                | Apple iPhone 7 Plus - 256GB - Matte Black - Factory Unlocked | 5            |
-                | Starbucks Coffee House Blend, Ground, 12 oz                  | 5            |
+                | Sonic Mania: Collector's Edition-Nintendo Switch - Switch    | 1            |
+                

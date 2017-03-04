@@ -98,7 +98,14 @@ public class StepDefinitions {
 	
 	@Given("The item has status (.*)")
 	public void The_item_has_status(String status) {
-		System.out.println("Check item status");
+		if (status.equals("Out-Of-Stock")) {
+			try {
+				WebElement outOfStockDiv = wd.findElement(By.id("outOfStock"));
+				Assert.assertTrue(outOfStockDiv != null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@When("I click (.*)")
@@ -106,6 +113,9 @@ public class StepDefinitions {
 		if (button.equals("\"Add to Cart\"")) {
 			WebElement addToCart = fluentWait(By.id("add-to-cart-button"));
 			addToCart.click();
+		} else if (button.equals("\"Add to Wishlist\"")) {
+			WebElement addToWishlist = fluentWait(By.id("add-to-wishlist-button-submit"));
+			addToWishlist.click();
 		}
 	}
 	
@@ -119,11 +129,23 @@ public class StepDefinitions {
 		Assert.assertTrue(quantityStr.equals(quantity));
 	}
 	
+	@Then("I have nothing in my shopping cart")
+	public void I_have_nothing_in_my_shopping_cart() {
+		// Go to home
+		WebElement homeLink = fluentWait(By.className("a-link-nav-icon"));
+		homeLink.click();
+		
+		// Verify that the cart is empty
+		String cartCount = fluentWait(By.id("nav-cart-count")).getText();
+		Assert.assertTrue(cartCount.equals("0"));
+	}
+	
 	@After
 	public void tearDown() {
 		wd.quit();
 	}
 	
+	// Source: http://stackoverflow.com/questions/12041013/selenium-webdriver-fluent-wait-works-as-expected-but-implicit-wait-does-not
 	private WebElement fluentWait(final By locator) {
 	    Wait<WebDriver> wait = new FluentWait<WebDriver>(wd)
 	            .withTimeout(30, TimeUnit.SECONDS)
